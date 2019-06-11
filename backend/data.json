@@ -1,0 +1,5 @@
+[
+  { "nombre": "Mesa", "valor": 150, "moneda": "AR$", "id": 0 },
+  { "nombre": "Plato", "valor": 2, "moneda": "AR$", "id": 1 },
+  { "nombre": "Harina", "valor": 5, "moneda": "AR$", "id": 2 }
+]
