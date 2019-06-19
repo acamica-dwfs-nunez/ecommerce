@@ -1,10 +1,10 @@
 /* api.js es un archvo que define los endpoints para nuestra API, usando el framework de node express, y su modulo de enrutamiento*/
-
 const express = require('express') // importamos el modulo express
 const Router = express.Router() // extraemos el modulo Router y creamos un objeto Router llamando a la función
 const fs = require('fs') // fs nos permite interactuar con el sistema de archivos
 
 const products = JSON.parse(fs.readFileSync('data.json')) // con fs.readFileSync, leemos un archivo JSON de forma SINCRONICA, esto quiere decir que va a bloquear nuestro main thread mientras ejecute esta acción, con JSON.parse transformamos ese JSON en un objeto de JS
+const Banners = require('../models/Banners')
 
 /*
   Todos los endpoints se crean llamando al metodo http dentro del router, puede sonar medio confuso, pero con un ejemplo va a quedar más claro
@@ -34,6 +34,24 @@ Router.post('/products', async (req, res) => {
   products.push(body)
   fs.writeFileSync('data.json', JSON.stringify(products))
   res.json(products)
+})
+
+Router.get('/banners', async (req, res) => {
+  res.json(await Banners.find({}))
+})
+
+Router.get('/banners/:id', async (req, res) => {
+  const { id } = req.params
+  res.json(await Banners.findById(id))
+})
+
+Router.post('/banners', async (req, res) => {
+  const banner = new Banners({
+      name: req.query.name,
+      url: req.query.url,
+      status: req.query.status
+    })
+  res.json(await banner.save())
 })
 
 module.exports = Router // al final, exportamos nuestro objeto de router como un modulo

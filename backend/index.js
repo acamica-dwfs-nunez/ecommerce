@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const Categories = require('./models/Categorias')
+const Banners = require('./models/Banners')
 
 const api = require('./routes/api')
 
@@ -26,12 +27,12 @@ async function startServer(err) {
 
 
   // esta parte muestra como crear un documento de mongodb
-  const categoria = new Categories({
-    name: 'Shirts',
-    description: 'remeritas piola'
-  })
+  // const categoria = new Categories({
+  //   name: 'Shirts',
+  //   description: 'remeritas piola'
+  // })
 
-  await categoria.save() // acá lo guardamos
+  // await categoria.save() // acá lo guardamos
 
-  console.log(await Categories.find({})) // acá vemos el listado de objetos y le hacemos un console.log
+  // console.log(await Categories.find({})) // acá vemos el listado de objetos y le hacemos un console.log
 }
