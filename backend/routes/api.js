@@ -46,10 +46,11 @@ Router.get('/banners/:id', async (req, res) => {
 })
 
 Router.post('/banners', async (req, res) => {
+  const {name, url, status} = req.query
   const banner = new Banners({
-      name: req.query.name,
-      url: req.query.url,
-      status: req.query.status
+      name,
+      url,
+      status
     })
   res.json(await banner.save())
 })
